@@ -1,7 +1,7 @@
 module.exports = {
   apps: [{
     name: 'testPm2', // pm2任务名称
-    script: './src/index.js', // node执行程序入口文件
+    script: 'npm run start', // node执行程序入口文件
 
     // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
     instances: 1,
