@@ -1,7 +1,7 @@
 module.exports = {
   apps: [{
-    name: 'testPm2',
-    script: './src/index.js',
+    name: 'testPm2', // pm2任务名称
+    script: './src/index.js', // node执行程序入口文件
 
     // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
     instances: 1,
@@ -18,12 +18,12 @@ module.exports = {
 
   deploy: {
     production: {
-      user: 'root',
-      host: '39.105.159.152',
-      ref: 'origin/master',
-      repo: 'git@github.com:IceyIsAlreadyTaken/pm2deploy.git',
-      path: '/var/www/production',
-      'post-deploy': 'npm install && pm2 reload ecosystem.config.js --env production'
+      user: 'root', // 服务器登录名
+      host: '39.105.159.152', // 服务器地址
+      ref: 'origin/master', // 代码仓库分支
+      repo: 'git@github.com:IceyIsAlreadyTaken/pm2deploy.git', // 代码仓库地址
+      path: '/var/www/production', // 部署到服务器上的地址
+      'post-deploy': 'npm install && pm2 reload ecosystem.config.js --env production' // 服务器克隆代码之后执行脚本
     }
   }
 };
