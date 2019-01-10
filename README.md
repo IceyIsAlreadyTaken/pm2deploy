@@ -1,63 +1,51 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+PM2一键部署
+## PM2介绍  
+PM2是node进程管理工具，可以利用它来简化很多Node应用管理的繁琐任务，如性能监控、自动重启、负载均衡等  
 
-## Available Scripts
+## PM2好处
+    1. 无需手动或者使用ftp将本地代码拷贝到远程服务器
+    2. 无需手动重启远程node服务
+    3. 项目的升级迭代非常方便
+    4. 具有负载均衡功能
+   
 
-In the project directory, you can run:
+## 实现步骤
+    1.将本地代码发布到github远程仓库(这里可以根据自身情况确定代码发布的远程仓库，一般公司代码都会发布到自己的gitlab)
+    2.在需要运行node服务的服务器上生成ssh key,并将公钥添加到github后台(这里主要是为了服务器能够从远程仓库拉取代码,所以确保远程服务器上已经安装了git)
+    ```
+    yum install -y git  (centos系统)
+    apt-get install git (ubuntu系统)
+    ```
+    3.在本地及远程仓库全局安装pm2
+    ```
+    npm install -g pm2
+    ```
+    4.使用pm init 生成ecosystem.config.js配置文件，并修改相应配置（主要是修改app下的name和script,deploy下的host,ref,repo,path,该项目的ecosystem.config.js中详细的配置描述）
+    pm2文档地址：https://pm2.io/doc/en/runtime/guide/ecosystem-file/
+    5.切换到本地根目录，运行部署命令
+    ```
+     # Setup deployment at remote location
+     pm2 deploy production setup
 
-### `npm start`
+     # Update remote version
+     pm2 deploy production update // 更新部署的时候确保代码已经提交到git仓库
+    ```
+    
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
 ### Deployment
 
